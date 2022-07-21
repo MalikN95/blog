@@ -1,0 +1,66 @@
+const express = require('express')
+const app = express()
+const mongoose = require('mongoose')
+const session = require('express-session')
+const MongoStore = require('connect-mongodb-session')(session)
+const exphbs = require('express-handlebars')
+const varMiddleware = require('./middleware/variables')
+const homeRoutes = require('./routes/home.routes')
+const addPostRoutes = require('./routes/add-post.routes')
+const authRoutes = require('./routes/auth.routes')
+
+
+const MONGODB_URI = `mongodb+srv://blog:root@cluster0.ttgagmc.mongodb.net/?retryWrites=true&w=blogdb`
+
+// Handlebars settings
+const hbs = exphbs.create({
+    defaultLayout: 'main',
+    extname: 'hbs'
+})
+
+const store = new MongoStore({
+    collection: 'sessions',
+    URI: MONGODB_URI
+})
+
+app.engine('hbs', hbs.engine)
+app.set('view engine', 'hbs')
+app.set('views', 'views')
+
+app.use(express.static('assets'))
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(session({
+    secret: 'some secret value',
+    resave: false,
+    saveUninitialized: false,
+    store
+}))
+app.use(varMiddleware)
+
+
+//Routes
+app.use('/', homeRoutes)
+app.use('/add-post', addPostRoutes)
+app.use('/auth', authRoutes)
+
+
+const PORT = process.env.PORT || 3000
+async function start(){
+    try{
+       
+        await mongoose.connect(MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+        
+        app.listen(PORT, () => {
+            console.log(`Server start on ${PORT} port`);
+        })
+    }  catch(e){
+        console.log(e);
+    }
+}
+
+start()
+

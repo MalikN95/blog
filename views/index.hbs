@@ -1,0 +1,28 @@
+{{> navbar}}
+<div class="container">
+    <h1>Список постов</h1>
+    <div class="row">
+        {{#each posts}}
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-image">
+                    {{#if titleImg}}
+                    <img src="/img/{{titleImg}}">
+                    {{else}}
+                    <img src="/img/defaul.jpg">
+                    {{/if}}
+                    <span class="card-title">{{title}}</span>
+                </div>
+                <div class="card-content">
+                    <h4>Автор: <span>{{user.login}}</span></h4>
+                    <p>{{text}}</p>
+                    </div>
+                    <div class="card-action">
+                    <a href="/post/{{_id}}">Читать далее...</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    
+</div>
