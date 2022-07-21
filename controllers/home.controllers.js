@@ -8,3 +8,13 @@ module.exports.homePage = async function(req, res){
         posts
     })
 }
+
+module.exports.postPage = async function(req, res){
+    console.log(req.params.id);
+    const post = await Post.findById(req.params.id).populate('user').lean()
+    res.render('post', {
+        ispost: true,
+        title: 'Пост',
+        post
+    })
+}

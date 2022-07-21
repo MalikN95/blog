@@ -4,6 +4,6 @@ const router = express.Router()
 
 
 router.get('/', controller.homePage)
-
+router.get('/post/:id', controller.postPage)
 
 module.exports = router

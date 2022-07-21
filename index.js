@@ -8,6 +8,7 @@ const varMiddleware = require('./middleware/variables')
 const homeRoutes = require('./routes/home.routes')
 const addPostRoutes = require('./routes/add-post.routes')
 const authRoutes = require('./routes/auth.routes')
+const userPostsRoutes = require('./routes/user-posts.routes')
 
 
 const MONGODB_URI = `mongodb+srv://blog:root@cluster0.ttgagmc.mongodb.net/?retryWrites=true&w=blogdb`
@@ -41,9 +42,9 @@ app.use(varMiddleware)
 
 //Routes
 app.use('/', homeRoutes)
-app.use('/add-post', addPostRoutes)
 app.use('/auth', authRoutes)
-
+app.use('/add-post', addPostRoutes)
+app.use('/user-posts', userPostsRoutes)
 
 const PORT = process.env.PORT || 3000
 async function start(){

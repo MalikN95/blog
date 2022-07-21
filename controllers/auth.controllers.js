@@ -33,7 +33,6 @@ module.exports.login = async function(req, res){
     const {login, password} = req.body
     try{
         const candidate = await User.findOne({login: login}).lean()
-        console.log(candidate);
         if(candidate){
             const areSame = password === candidate.password
             if (areSame) {
