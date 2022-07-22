@@ -18,6 +18,11 @@ const postSchema = new Schema({
     ref: 'users',
     required: true
   },
+  date:{
+    type: Date,
+    required: true,
+    default: Date.now
+  },
   media:[
     {
         src: {
