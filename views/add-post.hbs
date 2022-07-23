@@ -6,7 +6,7 @@
         <form action="/add-post" method="post" class="col s12" enctype="multipart/form-data">
             <div class="row">
                 <div class="input-field col s6">
-                    <input name="title" id="input_text" type="text" data-length="10">
+                    <input name="title" id="input_text" type="text" data-length="10" >
                     <label for="input_text">Заголовок статьи</label>
                 </div>
                 <div class="file-field input-field col s3">
@@ -26,7 +26,7 @@
                     <label for="textarea2">Текст</label>
                 </div>
             </div>
-            <input type="hidden" name="userId" value="{{user._id}}">
+            <input type="hidden" name="userLogin" value="{{user.login}}">
                 <button class="btn waves-effect waves-light" type="submit">Сохранить запись</button>
         </form>
         </div>

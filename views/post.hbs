@@ -5,16 +5,16 @@
         <div class="col s12 m12">
             <div class="card">
                 <div class="card-image">
-                    {{#if post.titleImg}}
-                    <img src="/{{post.titleImg}}">
+                    {{#if post.dataValues.titleImg}}
+                    <img src="/{{post.dataValues.titleImg}}">
                     {{else}}
                     <img src="/img/defaul.jpg">
                     {{/if}}
-                    <span class="card-title">{{post.title}}</span>
+                    <span class="card-title">{{post.dataValues.title}}</span>
                 </div>
                 <div class="card-content">
-                    <h4>Автор: <span>{{post.user.login}}</span></h4>
-                    <p>{{post.text}}</p>
+                    <h4>Автор: <span>{{post.dataValues.userLogin}}</span></h4>
+                    <p>{{post.dataValues.text}}</p>
                 </div>
                 <div class="card-action">
                 </div>

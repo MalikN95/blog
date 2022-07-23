@@ -1,20 +1,27 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 
-const userSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  login: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
+const User = sequelize.define('User', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    login: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
 })
 
-module.exports = mongoose.model('users', userSchema)
+console.log(User === sequelize.models.User)
+
+module.exports = User

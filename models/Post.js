@@ -1,35 +1,29 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 
-const postSchema = new Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  titleImg:{
-    type: String
-  },
-  text: {
-    type: String,
-    required: true
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'users',
-    required: true
-  },
-  date:{
-    type: Date,
-    required: true,
-    default: Date.now
-  },
-  media:[
-    {
-        src: {
-            type: String
-        }
+const Post = sequelize.define('User', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    titleImg: {
+        type: DataTypes.STRING
+    },
+    text: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    date: {
+        type: DataTypes.DATE
     }
-  ]
-})
+});
 
-module.exports = mongoose.model('posts', postSchema)
+
+
+
+module.exports = Post

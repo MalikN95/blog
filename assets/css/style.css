@@ -27,5 +27,5 @@ p{
 
 .card-image img{
     object-fit: cover;
-    max-height: 345px;
+    height: 345px;
 }

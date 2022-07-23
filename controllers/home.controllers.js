@@ -1,7 +1,7 @@
-const Post = require('../models/Post')
+const {User, Post} = require('../db')
 
 module.exports.homePage = async function(req, res){
-    const posts = await Post.find().populate('user').sort({date: -1}).lean()
+    const posts = await Post.findAll()
     res.render('index', {
         isHome: true,
         title: 'Главная страница',
@@ -10,7 +10,7 @@ module.exports.homePage = async function(req, res){
 }
 
 module.exports.postPage = async function(req, res){
-    const post = await Post.findById(req.params.id).populate('user').lean()
+    const post = await Post.findByPk(req.params.id)
     res.render('post', {
         ispost: true,
         title: post.title,
@@ -20,7 +20,7 @@ module.exports.postPage = async function(req, res){
 
 module.exports.postUpdatePage = async function(req, res){
     const user = req.session.user
-    const post = await Post.findById(req.params.id).populate('user').lean()
+    const post = await Post.findByPk(req.params.id)
     res.render('update-post', {
         ispost: true,
         title: post.title,

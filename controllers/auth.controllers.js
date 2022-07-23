@@ -1,5 +1,7 @@
-const User = require('../models/User')
 const bcrypt = require('bcryptjs')
+const {User} = require('../db')
+
+
 module.exports.auth = async function(req, res){
     res.render('auth', {
         title: 'Авторизация'
@@ -17,13 +19,12 @@ module.exports.addUser = async function(req, res){
     const {name, login, password} = req.body
     const hashPassword =await bcrypt.hash(password, 10)
     try{
-        res.redirect('/auth')
-        const user = await new User({
+        await User.create({
             name,
             login,
             password: hashPassword
-        }).save()
-        
+        })
+        res.redirect('/auth')
     } catch(e){
         console.log(e);
     }
@@ -33,9 +34,9 @@ module.exports.addUser = async function(req, res){
 module.exports.login = async function(req, res){
     const {login, password} = req.body
     try{
-        const candidate = await User.findOne({login: login}).lean()
+        const candidate = await User.findOne({where: {login: login}})
         if(candidate){
-            const areSame = await bcrypt.compare(password, candidate.password) 
+            const areSame = await bcrypt.compare(password, candidate.dataValues.password)
             if (areSame) {
                 req.session.user = candidate
                 req.session.isAuthenticated = true

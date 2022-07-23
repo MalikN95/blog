@@ -1,4 +1,6 @@
-const Post = require('../models/Post')
+const { User, Post } = require("../db")
+
+
 
 module.exports.addPostPage = async function(req, res){
     const user = req.session.user
@@ -12,32 +14,27 @@ module.exports.addPostPage = async function(req, res){
 module.exports.addPost = async function(req, res){
     if(req.file) {
         try{
-            const post = await new Post({
+            await Post.create({
                 title: req.body.title,
                 titleImg: req.file. path,
                 text: req.body.text,
-                user: req.body.userId
-            }).save()
+                userLogin: req.body.userLogin
+            })
             res.redirect('/user-posts')
         } catch(e){
             console.log(e);
         }
     } else {
         try{
-            const post = await new Post({
+            await Post.create({
                 title: req.body.title,
                 text: req.body.text,
-                user: req.body.userId
-            }).save()
+                userLogin: req.body.userLogin
+            })
             res.redirect('/user-posts')
         } catch(e){
             console.log(e);
         }
     }
 
-}
-
-module.exports.updatePost = async function({body}, res){
-    console.log('patch');
-    console.log(body);
 }

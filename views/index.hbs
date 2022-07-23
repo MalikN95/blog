@@ -6,23 +6,23 @@
         <div data-post="{{_id}}" class="post-card col s12 m6">
             <div class="card">
                 <div class="card-image">
-                    {{#if titleImg}}
-                    <img src="/{{titleImg}}">
+                    {{#if dataValues.titleImg}}
+                    <img src="/{{dataValues.titleImg}}">
                     {{else}}
                     <img src="/img/defaul.jpg">
                     {{/if}}
-                    <span class="card-title">{{title}}</span>
-                    <span class="card-date">{{date}}</span>
+                    <span class="card-title">{{dataValues.title}}</span>
+                    <span class="card-date">{{dataValues.createdAt}}</span>
                 </div>
                 <div class="card-content">
-                    <h4>Автор: <span>{{user.login}}</span></h4>
-                    <p>{{text}}</p>
+                    <h4>Автор: <span>{{dataValues.userLogin}}</span></h4>
+                    <p>{{dataValues.text}}</p>
                 </div>
                 <div class="card-action">
-                    <a href="/post/{{_id}}">Читать далее...</a>
+                    <a href="/post/{{dataValues.id}}">Читать далее...</a>
                     {{#if @root.userPost}}
-                    <a class="waves-effect waves-light btn" href="/edit/{{_id}}">Редактировать</a>
-                    <button data-delElem="{{_id}}" class="post-btn btn waves-effect red" type="submit" name="action">Удалить</button>
+                    <a class="waves-effect waves-light btn" href="/edit/{{dataValues.id}}">Редактировать</a>
+                    <button data-delElem="{{dataValues.id}}" class="post-btn btn waves-effect red" type="submit" name="action">Удалить</button>
                     {{/if}}
                 </div>
             </div>

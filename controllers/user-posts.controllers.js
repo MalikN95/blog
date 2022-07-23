@@ -1,9 +1,7 @@
-const Post = require('../models/Post')
+const {Post} = require('../db')
 
 module.exports.userPosts = async function(req, res){
-    const posts = await Post.find({user: req.session.user._id})
-    .populate('user')
-    .sort({date: -1}).lean()
+    const posts = await Post.findAll({where: {userLogin: req.session.user.login}})
     res.render('index', {
         userPost: true,
         title: 'Мои посты',
@@ -12,6 +10,6 @@ module.exports.userPosts = async function(req, res){
 }
 
 module.exports.deletePosts = async function(req, res){
-    const posts = await Post.findByIdAndDelete(req.body.postId).populate('user').lean()
-    res.json(posts._id)
+    const post = await Post.destroy({where: {id: req.body.postId}})
+    res.json(post.id)
 }
