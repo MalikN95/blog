@@ -28,16 +28,3 @@ module.exports.postUpdatePage = async function(req, res){
         user
     })
 }
-
-module.exports.postUpdate = async function(req, res){
-    const {id} = req.body
-    delete req.body.id
-    const post = await Post.findByIdAndUpdate(id, req.body).lean()
-    if(req.file){
-        const img = {
-            titleImg: req.file.path
-        }
-        const post = await Post.findByIdAndUpdate(id, img).lean()
-    }
-    res.redirect('/user-posts')
-}
