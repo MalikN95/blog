@@ -53,8 +53,7 @@ app.use('/user-posts', userPostsRoutes)
 
 const PORT = process.env.PORT || 3000
 async function start(){
-    try{
-       
+    try{ 
         try {
             await sequelize.authenticate();
             console.log('Connection has been established successfully.');
