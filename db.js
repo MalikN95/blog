@@ -1,19 +1,19 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
-// sequelize = new Sequelize(process.env.DATABASE_URL, {
-//     dialectOptions: {
-//       ssl: {
-//         require: true,
-//         rejectUnauthorized: false
-//       }
-//     }
-//   }
-// )
+sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
+  }
+)
 
-const sequelize = new Sequelize('my_blog', 'postgres', 'malikN', {
-    host: 'localhost',
-    dialect: 'postgres'
-  });
+// const sequelize = new Sequelize('my_blog', 'postgres', 'malikN', {
+//     host: 'localhost',
+//     dialect: 'postgres'
+// });
 
 class Post extends Model {}
 
