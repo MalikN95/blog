@@ -4,7 +4,11 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
 const exphbs = require('express-handlebars')
+
+//middleware var
 const varMiddleware = require('./middleware/variables')
+
+//routes var
 const homeRoutes = require('./routes/home.routes')
 const addPostRoutes = require('./routes/add-post.routes')
 const authRoutes = require('./routes/auth.routes')

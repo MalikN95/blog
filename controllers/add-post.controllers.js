@@ -11,14 +11,18 @@ module.exports.addPostPage = async function(req, res){
 
 module.exports.addPost = async function({body}, res){
     try{
-        res.redirect('/')
         const post = await new Post({
             title: body.title,
             text: body.text,
             user: body.userId
         }).save()
-        
+        res.redirect('/user-posts')
     } catch(e){
         console.log(e);
     }
+}
+
+module.exports.updatePost = async function({body}, res){
+    console.log('patch');
+    console.log(body);
 }
