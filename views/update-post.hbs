@@ -3,7 +3,7 @@
 <div class="add-post">
     <div class="container">
         <div class="row">
-        <form action="/update" method="post" class="col s12" enctype="multipart/form-data">
+        <form action="/user-posts/update" method="post" class="col s12" enctype="multipart/form-data">
             <div class="row">
                 <div class="input-field col s6">
                     <input name="title" id="input_text" type="text" data-length="10" value="{{post.dataValues.title}}">
@@ -26,8 +26,8 @@
                     <label for="textarea2">Текст</label>
                 </div>
             </div>
-            <input type="hidden" name="userId" value="{{user._id}}">
-            <input type="hidden" name="id" value="{{post._id}}">
+            <input type="hidden" name="userLogin" value="{{post.dataValues.login}}">
+            <input type="hidden" name="id" value="{{post.dataValues.id}}">
             <button class="btn waves-effect waves-light" type="submit">Сохранить изменения</button>
         </form>
         </div>

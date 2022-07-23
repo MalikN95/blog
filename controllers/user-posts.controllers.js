@@ -9,7 +9,32 @@ module.exports.userPosts = async function(req, res){
     })
 }
 
-module.exports.deletePosts = async function(req, res){
+module.exports.updatePost = async function(req, res) {
+    if(req.file) {
+        try{
+            await Post.update({
+                title: req.body.title,
+                titleImg: req.file.path,
+                text: req.body.text
+            }, {where: {id: req.body.id}})
+        } catch(e){
+            console.log(e);
+        }
+    } else {
+        try{
+            await Post.update({
+                title: req.body.title,
+                text: req.body.text
+            }, {where: {id: req.body.id}})
+        } catch(e){
+            console.log(e);
+        }
+    }
+    res.redirect('/user-posts')
+}
+
+
+module.exports.deletePosts = async function(req, res) {
     const post = await Post.destroy({where: {id: req.body.postId}})
     res.json(post.id)
 }
