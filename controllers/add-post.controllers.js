@@ -9,17 +9,32 @@ module.exports.addPostPage = async function(req, res){
     })
 }
 
-module.exports.addPost = async function({body}, res){
-    try{
-        const post = await new Post({
-            title: body.title,
-            text: body.text,
-            user: body.userId
-        }).save()
-        res.redirect('/user-posts')
-    } catch(e){
-        console.log(e);
+module.exports.addPost = async function(req, res){
+    if(req.file) {
+        try{
+            const post = await new Post({
+                title: req.body.title,
+                titleImg: req.file. path,
+                text: req.body.text,
+                user: req.body.userId
+            }).save()
+            res.redirect('/user-posts')
+        } catch(e){
+            console.log(e);
+        }
+    } else {
+        try{
+            const post = await new Post({
+                title: req.body.title,
+                text: req.body.text,
+                user: req.body.userId
+            }).save()
+            res.redirect('/user-posts')
+        } catch(e){
+            console.log(e);
+        }
     }
+
 }
 
 module.exports.updatePost = async function({body}, res){

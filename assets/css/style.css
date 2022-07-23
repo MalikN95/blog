@@ -24,3 +24,8 @@ p{
     right: 10px;
     color: #fff;
 }
+
+.card-image img{
+    object-fit: cover;
+    max-height: 340px;
+}
